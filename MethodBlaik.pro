@@ -15,7 +15,8 @@ SOURCES += main.cpp \
 
 HEADERS += \
     BoolClasses/BoolVector/boolvector.h \
-    BoolClasses/BoolInterval/boolinterval.h
+    BoolClasses/BoolInterval/boolinterval.h \
+    global.h
 
 SUBDIRS += \
     BoolClasses \
