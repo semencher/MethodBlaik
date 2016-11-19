@@ -3,6 +3,12 @@
 
 #include <iostream>
 
+#include <QVector>
+
+#include <QString>
+
+#include <fstream>
+
 #include "math.h"
 
 class BoolVector;
@@ -32,5 +38,11 @@ public:
         return type_error;
     }
 };  // BCException
+
+struct IntervalFunction
+{
+    BoolInterval * interval;
+    bool value;
+};
 
 #endif // GLOBAL_H
