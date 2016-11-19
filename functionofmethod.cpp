@@ -4,7 +4,8 @@ QVector<IntervalFunction> parse(const QString & plaFile)
 {
     QVector<IntervalFunction> arrayIntFunc;
     std::ifstream file;
-    file.open(plaFile.toStdString(), std::ios::in);
+    std::string nameFile = plaFile.toStdString();
+    file.open(nameFile, std::ios::in);
 
     if (!file)
     {
@@ -120,7 +121,12 @@ QVector<IntervalFunction> parse(const QString & plaFile)
                 interv.set1(i+1);
             }
             else
-                interv.set0(i+1);
+            {
+                if (point == '0')
+                    interv.set0(i+1);
+                else
+                    interv.setDC(i+1);
+            }
         }
 
         for (int j=0; j<ocount; j++)
@@ -146,5 +152,6 @@ QVector<IntervalFunction> parse(const QString & plaFile)
 
         arrayIntFunc.push_back(iF);
     }
+    file.close();
     return arrayIntFunc;
 }
