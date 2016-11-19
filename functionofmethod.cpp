@@ -1,10 +1,10 @@
 #include "functionofmethod.h"
 
-QVector parse(const QString & plaFile)
+QVector<IntervalFunction> parse(const QString & plaFile)
 {
     QVector<IntervalFunction> arrayIntFunc;
     std::ifstream file;
-    file.open(namefile, std::ios::in);
+    file.open(plaFile.toStdString(), std::ios::in);
 
     if (!file)
     {
@@ -107,7 +107,7 @@ QVector parse(const QString & plaFile)
 
     for (int k=0; k<pcount; k++)
     {
-        for (i; i<icount; i++)
+        for (; i<icount; i++)
         {
             if (file.eof())
             {
