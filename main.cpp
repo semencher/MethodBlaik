@@ -19,6 +19,14 @@ int main(int argc, char *argv[])
         std::cout << " " << array[i].value << "\n";
 
     }
+    std::cout << "\n\n\n\n";
+    generalBonding(array);
+    for (int i = 0; i < size; ++i)
+    {
+        array[i].interval->showBI(std::cout);
+        std::cout << " " << array[i].value << "\n";
+
+    }
 
 
     }

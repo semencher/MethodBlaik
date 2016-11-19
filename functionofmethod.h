@@ -9,4 +9,6 @@
 
 QVector<IntervalFunction> parse(const QString & plaFile);
 
+void generalBonding(QVector<IntervalFunction> & arrayIntFunc);
+
 #endif // FUNCTIONOFMETHOD_H

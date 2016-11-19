@@ -222,3 +222,49 @@ void BoolInterval::setDC()
     vv->sumModTwo(*vv,*vv);
     vv->inv(*vv);
 }
+
+bool BoolInterval::ortByOnlyComp(BoolInterval & second_op)
+{
+    BoolVector sumVV(second_op.vv->getSize());
+    vv->orOp(*second_op.vv, sumVV);
+    sumVV.inv(sumVV);
+    BoolVector sumModTwo(second_op.vv->getSize());
+    bv->sumModTwo(*second_op.bv, sumModTwo);
+    BoolVector rezult(vv->getSize());
+    sumModTwo.andOp(sumVV, rezult);
+    if (rezult.weight() == 1)
+    {
+        return true;
+    }
+    else
+        return false;
+}
+
+IntervalFunction * BoolInterval::generalBonding(BoolInterval & second_op)
+{
+    BoolVector conVV(vv->getSize());
+    vv->andOp(*second_op.vv, conVV);
+    BoolVector invConVV(vv->getSize());
+    conVV.inv(invConVV);
+    BoolVector sumBV(vv->getSize());
+    bv->orOp(*second_op.bv, sumBV);
+    sumBV.andOp(invConVV, sumBV);
+
+    BoolVector sumVV(vv->getSize());
+    vv->orOp(*second_op.vv, sumVV);
+    BoolVector invSumVV(vv->getSize());
+    sumVV.inv(invSumVV);
+    BoolVector sumModTwo1(vv->getSize());
+    bv->sumModTwo(*second_op.bv, sumModTwo1);
+    BoolVector addInt(vv->getSize());
+    sumModTwo1.andOp(invSumVV, addInt);
+    BoolVector invAddInt(vv->getSize());
+    addInt.inv(invAddInt);
+
+    IntervalFunction * intFunc = new IntervalFunction;
+    intFunc->value = true;
+    sumBV.andOp(invAddInt ,*intFunc->interval->bv);
+    conVV.orOp(addInt ,*intFunc->interval->vv);
+
+    return intFunc;
+}

@@ -155,3 +155,22 @@ QVector<IntervalFunction> parse(const QString & plaFile)
     file.close();
     return arrayIntFunc;
 }
+
+void generalBonding(QVector<IntervalFunction> & arrayIntFunc)
+{
+    QVector<IntervalFunction>::iterator iter;
+    QVector<IntervalFunction>::iterator current;
+
+    for(; iter != arrayIntFunc.end(); ++iter)
+    {
+        current = iter;
+        current++;
+        for(; current != arrayIntFunc.end(); ++current)
+        {
+            if (iter->interval->ortByOnlyComp(*current->interval))
+            {
+                arrayIntFunc.push_back(*iter->interval->generalBonding(*current->interval));
+            }
+        }
+    }
+}

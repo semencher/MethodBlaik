@@ -56,6 +56,9 @@ public:
     BoolInterval(BoolInterval &second_op, BoolInterval &third_op);
     int fullweight();
 
+    bool ortByOnlyComp(BoolInterval & second_op);
+    IntervalFunction * generalBonding(BoolInterval & second_op);
+
 };  // BoolInterval
 
 #endif // BOOLINTERVAL_H
