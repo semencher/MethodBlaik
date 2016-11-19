@@ -3,6 +3,10 @@
 
 #include "global.h"
 
-QVector parse(const QString & plaFile);
+#include "BoolClasses/BoolVector/boolvector.h"
+
+#include "BoolClasses/BoolInterval/boolinterval.h"
+
+QVector<IntervalFunction> parse(const QString & plaFile);
 
 #endif // FUNCTIONOFMETHOD_H

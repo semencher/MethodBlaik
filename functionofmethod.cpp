@@ -1,10 +1,11 @@
 #include "functionofmethod.h"
 
-QVector parse(const QString & plaFile)
+QVector<IntervalFunction> parse(const QString & plaFile)
 {
     QVector<IntervalFunction> arrayIntFunc;
     std::ifstream file;
-    file.open(namefile, std::ios::in);
+    std::string nameFile = plaFile.toStdString();
+    file.open(nameFile, std::ios::in);
 
     if (!file)
     {
@@ -95,8 +96,8 @@ QVector parse(const QString & plaFile)
         throw e;
     }
 
-    BoolVect haract(ocount);
-    BoolInt interv(icount);
+    BoolVector haract(ocount);
+    BoolInterval interv(icount);
 
     if (point=='1')
     {
@@ -107,7 +108,7 @@ QVector parse(const QString & plaFile)
 
     for (int k=0; k<pcount; k++)
     {
-        for (i; i<icount; i++)
+        for (; i<icount; i++)
         {
             if (file.eof())
             {
@@ -120,7 +121,12 @@ QVector parse(const QString & plaFile)
                 interv.set1(i+1);
             }
             else
-                interv.set0(i+1);
+            {
+                if (point == '0')
+                    interv.set0(i+1);
+                else
+                    interv.setDC(i+1);
+            }
         }
 
         for (int j=0; j<ocount; j++)
@@ -140,6 +146,12 @@ QVector parse(const QString & plaFile)
         }
         i=0;
 
-        addInt(haract, interv);
+        IntervalFunction iF;
+        iF.interval = new BoolInterval(interv);
+        iF.value = haract.get(1);
+
+        arrayIntFunc.push_back(iF);
     }
+    file.close();
+    return arrayIntFunc;
 }
