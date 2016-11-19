@@ -95,8 +95,8 @@ QVector parse(const QString & plaFile)
         throw e;
     }
 
-    BoolVect haract(ocount);
-    BoolInt interv(icount);
+    BoolVector haract(ocount);
+    BoolInterval interv(icount);
 
     if (point=='1')
     {
@@ -140,6 +140,11 @@ QVector parse(const QString & plaFile)
         }
         i=0;
 
-        addInt(haract, interv);
+        IntervalFunction iF;
+        iF.interval = new BoolInterval(interv);
+        iF.value = haract.get(1);
+
+        arrayIntFunc.push_back(iF);
     }
+    return arrayIntFunc;
 }
