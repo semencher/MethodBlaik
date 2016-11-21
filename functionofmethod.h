@@ -3,10 +3,17 @@
 
 #include "global.h"
 
-#include "BoolClasses/BoolVector/boolvector.h"
-
 #include "BoolClasses/BoolInterval/boolinterval.h"
 
-QVector<IntervalFunction> parse(const QString & plaFile);
+void parse(const QString & plaFile, QVector<IntervalFunction *> & arrayIntFunc,
+           QVector<IntervalFunction *> & a0);
+
+void generalBonding(QVector<IntervalFunction *> & arrayIntFunc);
+
+void absorb(QVector<IntervalFunction *> & arrayIntFunc);
+
+void correction(QVector<IntervalFunction *> & a1, QVector<IntervalFunction *> & a0);
+
+void show(QVector<IntervalFunction *> & a1, QVector<IntervalFunction *> & a0, std::string filename);
 
 #endif // FUNCTIONOFMETHOD_H
